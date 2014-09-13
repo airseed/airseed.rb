@@ -2,7 +2,8 @@ module Airseed
   module Client
     module_function
 
-    def request(method, url, params = {}, options = {})
+    def request(method, path, params = {}, options = {})
+      url = Airseed.base_api + path
       bearer_token = options[:bearer_token]
       use_ssl = url.scheme == "https"
 
