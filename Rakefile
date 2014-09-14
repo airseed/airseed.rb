@@ -1,11 +1,12 @@
 require "bundler/gem_tasks"
+require 'airseed'
 
-require 'rspec/core/rake_task'
+desc "Run default test"
+task :default do |t|
+  Airseed.client_id     = ENV['CLIENT_ID']
+  Airseed.client_secret = ENV['CLIENT_SECRET']
+  Airseed.base_api      = 'https://api.airseed.com'
 
-desc "Run specs"
-task :test => :spec
-
-desc "Run specs"
-RSpec::Core::RakeTask.new do |t|
-  t.pattern = "./spec/**/*_spec.rb" # don't need this, it's default.
+  # Airseed::Client.request(:get, 'v1/users/me', {}, {:bearer_token => ''})
 end
+

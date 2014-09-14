@@ -1,25 +1,24 @@
+require 'json'
+
 module Airseed
   module Client
     module_function
 
     def request(method, path, params = {}, options = {})
-      url = Airseed.base_api + path
+      url = URI.join(Airseed.base_api, path).to_s
       bearer_token = options[:bearer_token]
-      use_ssl = url.scheme == "https"
 
       if method.to_s.downcase.to_sym == :get
         url_params = URI.escape(params.collect{|k,v|"#{k}=#{v}"}.join('&'))
-        uri = URI::parse("#{url}?#{url_params}")
+        uri        = URI::parse("#{url}?#{url_params}")
+        http       = http_request(uri)
 
-        res = Net::HTTP.start(uri.host, uri.port, use_ssl: use_ssl) do |http|
-          req = Net::HTTP::Get.new(uri.to_s)
-        end
+        req        = Net::HTTP::Get.new uri.to_s
       else
-        uri = URI.parse(url)
-        res = Net::HTTP.start(uri.host, uri.port, use_ssl: use_ssl) do |http|
-          req = Net::HTTP::Post.new(uri.request_uri, {'Content-Type' =>'application/json'})
-          req.body = params.to_json
-        end
+        uri  = URI.parse(url)
+        http = http_request(uri)
+        req  = Net::HTTP::Post.new(uri.to_s, {'Content-Type' =>'application/json'})
+        req.body = params.to_json
       end
 
       if bearer_token
@@ -33,13 +32,19 @@ module Airseed
       unless res.kind_of? Net::HTTPSuccess
         raise "HTTP Response: #{res.code} #{res.message} for #{url}"
       end
-
-      res = JSON.parse(res.body) if res.body.present?
+      res = JSON.parse(res.body) unless res.body.nil? || res.body.empty?
 
       # Hashie::Mash.new(res.body)
       return res
     end
 
     class RequestError < StandardError; end
+
+    def http_request(uri)
+      http         = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = uri.scheme == "https"
+
+      return http
+    end
   end
 end
