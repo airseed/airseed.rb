@@ -18,8 +18,8 @@ Or install it yourself as:
 
 ## Usage
 
-		Airseed.base_api 			= 'https://api.airseed.com'
-		Airseed.client_id 		= ENV['CLIENT_ID']
+		Airseed.base_api = 'https://api.airseed.com'
+		Airseed.client_id = ENV['CLIENT_ID']
 		Airseed.CLIENT_SECRET = ENV['CLIENT_SECRET']
 
 		Airseed::Client.request(method, endpoint_path, endpoint_params, options)
