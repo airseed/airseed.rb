@@ -3,6 +3,17 @@ require 'json'
 module Airseed
   module Client
     module_function
+    # Public: Airseed API's Ruby Rest Client
+    #
+    # method - HTTP Verb
+    # path - API endpoint path
+    # params - API endpoint specific params
+    # options - API resource specific options, e.g. bearer_token
+    #
+    # Examples
+    #
+    #   request(:get, '/v1/users/me/info', {}. { :bearer_token => 'access_token' }
+    # Returns the API response as hash
 
     def request(method, path, params = {}, options = {})
       url = URI.join(Airseed.base_api, path).to_s
