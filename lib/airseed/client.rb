@@ -20,11 +20,11 @@ module Airseed
       bearer_token = options[:bearer_token]
 
       if method.to_s.downcase.to_sym == :get
-        url_params = URI.escape(params.collect{|k,v|"#{k}=#{v}"}.join('&'))
-        uri        = URI::parse("#{url}?#{url_params}")
-        http       = http_request(uri)
+        params = URI.escape(params.collect{|k,v|"#{k}=#{v}"}.join('&'))
+        uri    = URI::parse("#{url}?#{params}")
+        http   = http_request(uri)
 
-        req        = Net::HTTP::Get.new uri.to_s
+        req    = Net::HTTP::Get.new uri.to_s
       else
         uri  = URI.parse(url)
         http = http_request(uri)

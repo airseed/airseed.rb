@@ -23,6 +23,8 @@ Or install it yourself as:
 		Airseed.CLIENT_SECRET = ENV['CLIENT_SECRET']
 
 		Airseed::Client.request(method, endpoint_path, endpoint_params, options)
+		e.g. Airseed::Client.request(:get, 'users/v1/<user_id>', {}, :bearer_token => ENV['BEARER_TOKEN'])
+
 
 ## Contributing
 
