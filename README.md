@@ -18,13 +18,12 @@ Or install it yourself as:
 
 ## Usage
 
-		Airseed.base_api = 'https://api.airseed.com'
 		Airseed.client_id = ENV['CLIENT_ID']
-		Airseed.CLIENT_SECRET = ENV['CLIENT_SECRET']
+		Airseed.client_secret = ENV['CLIENT_SECRET']
+		Airseed.oauth_callback_url = 'https://example.com/airseed/callback'
 
-		Airseed::Client.request(method, endpoint_path, endpoint_params, options)
-		e.g. Airseed::Client.request(:get, 'users/v1/<user_id>', {}, :bearer_token => ENV['BEARER_TOKEN'])
-
+		Airseed::OAuth.login(provider)
+		Airseed::RestAPI.new(acccess_token).users_info
 
 ## Contributing
 
