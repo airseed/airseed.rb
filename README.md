@@ -20,9 +20,8 @@ Or install it yourself as:
 
 		Airseed.client_id = ENV['CLIENT_ID']
 		Airseed.client_secret = ENV['CLIENT_SECRET']
-		Airseed.oauth_callback_url = 'https://example.com/airseed/callback'
 
-		Airseed::OAuth.login(provider)
+		Airseed::OAuth.new(callback_url).login(provider)
 		Airseed::RestAPI.new(acccess_token).users_info
 
 ## Contributing
