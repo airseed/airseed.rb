@@ -26,11 +26,11 @@ describe Airseed::OAuth, :vcr do
   describe 'refresh_token' do
     let(:refresh_token) { 'deadbeaf' }
 
-    subject(:access_token) { oauth.refresh_token(refresh_token) }
+    subject(:response) { oauth.refresh_token(refresh_token) }
 
     it 'returns the oauth refresh access token' do
-      expect(access_token['access_token']).to_not be_nil
-      expect(access_token['expires_in']).to_not be_nil
+      expect(response['access_token']).to_not be_nil
+      expect(response['expires_in']).to_not be_nil
     end
   end
 end
