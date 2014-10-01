@@ -1,9 +1,9 @@
 require 'spec_helper'
 
-describe Airseed::RestAPI, :vcr do
+describe Airseed::UserAPI, :vcr do
 
   let(:access_token) { 'deadbeaf' }
-  let(:api_object) { Airseed::RestAPI.new(access_token) }
+  let(:api_object) { Airseed::UserAPI.new(access_token) }
 
   describe 'users_info' do
     subject(:users_info) { api_object.users_info }

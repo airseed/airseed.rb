@@ -1,7 +1,7 @@
 require "airseed/version"
 require "airseed/client"
 require "airseed/oauth"
-require "airseed/rest_api"
+require "airseed/user_api"
 
 module Airseed
   class << self

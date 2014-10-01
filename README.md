@@ -22,7 +22,7 @@ Or install it yourself as:
 		Airseed.client_secret = ENV['CLIENT_SECRET']
 
 		Airseed::OAuth.new(callback_url).login(provider)
-		Airseed::RestAPI.new(acccess_token).users_info
+		Airseed::UserAPI.new(acccess_token).users_info
 
 ## Contributing
 
