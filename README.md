@@ -18,11 +18,15 @@ Or install it yourself as:
 
 ## Usage
 
-		Airseed.client_id = ENV['CLIENT_ID']
-		Airseed.client_secret = ENV['CLIENT_SECRET']
+    Airseed.client_id = ENV['CLIENT_ID']
+    Airseed.client_secret = ENV['CLIENT_SECRET']
 
-		Airseed::OAuth.new(callback_url).login(provider)
-		Airseed::UserAPI.new(acccess_token).users_info
+    oauth = Airseed::OAuth.new(callback_url:'https://www.example.com/callback')
+    oauth.login(provider:'google_auth2')
+
+    user_api = Airseed::UserAPI.new(acccess_token:'a_access_token')
+    user_profile = user_api.users_info(id:'me')
+    products_data_for_user = user_api.endpoint(endpoint: 'product', id:'me')
 
 ## Contributing
 

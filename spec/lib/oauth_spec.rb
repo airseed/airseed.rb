@@ -2,17 +2,13 @@ require 'spec_helper'
 
 
 describe Airseed::OAuth, :vcr do
-  Airseed.client_id = ENV['CLIENT_ID']
-  Airseed.client_secret = ENV['CLIENT_SECRET']
+  Airseed.client_id = CONFIG['client_id']
+  Airseed.client_secret = CONFIG['client_secret']
 
-  let(:oauth_callback_url) { 'https://localhost:3000/callback' }
-
-  subject(:oauth) { Airseed::OAuth.new(oauth_callback_url) }
+  subject(:oauth) { Airseed::OAuth.new(CONFIG['oauth_callback_url']) }
 
   describe 'login' do
-    let(:provider) { 'google_oauth2' }
-
-    subject(:login) { oauth.login(provider) }
+    subject(:login) { oauth.login(CONFIG['provider']) }
     subject(:params) { URI.parse(login).query }
 
     it 'should return the ssl link' do
@@ -24,13 +20,14 @@ describe Airseed::OAuth, :vcr do
   end
 
   describe 'refresh_token' do
-    let(:refresh_token) { 'deadbeaf' }
-
-    subject(:response) { oauth.refresh_token(refresh_token) }
+    subject(:response) { oauth.refresh_token(CONFIG['refresh_token']) }
 
     it 'returns the oauth refresh access token' do
       expect(response['access_token']).to_not be_nil
       expect(response['expires_in']).to_not be_nil
+      if response['access_token'] != CONFIG['access_token']
+        CONFIG['access_token'] = response['access_token']
+      end
     end
   end
 end
