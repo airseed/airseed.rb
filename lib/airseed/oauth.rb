@@ -4,8 +4,8 @@ module Airseed
     AUTH_BASE_URL = "https://auth.airseed.com"
 
     def initialize(callback_url = nil)
-      @client_id     = Airseed.client_id,
-      @client_secret = Airseed.client_secret,
+      @client_id     = Airseed.client_id
+      @client_secret = Airseed.client_secret
       @callback_url  = callback_url
     end
 
