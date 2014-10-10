@@ -5,6 +5,6 @@ require "airseed/user_api"
 
 module Airseed
   class << self
-    attr_accessor :client_id, :client_secret
+    attr_accessor :client_id, :client_secret, :api_base_url, :auth_base_url
   end
 end

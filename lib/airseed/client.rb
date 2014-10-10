@@ -19,14 +19,13 @@ module Airseed
 
       if method.to_s.downcase.to_sym == :get
         params = URI.escape(params.collect{|k,v|"#{k}=#{v}"}.join('&'))
-        uri    = URI::parse("#{url}?#{params}")
+        uri    = URI.parse("#{url}?#{params}")
         http   = http_request(uri)
-
-        req    = Net::HTTP::Get.new uri.to_s
+        req    = Net::HTTP::Get.new uri.request_uri
       else
         uri  = URI.parse(url)
         http = http_request(uri)
-        req  = Net::HTTP::Post.new(uri.to_s, {'Content-Type' =>'application/json'})
+        req  = Net::HTTP::Post.new(uri.request_uri, {'Content-Type' =>'application/json'})
         req.body = params.to_json
       end
 

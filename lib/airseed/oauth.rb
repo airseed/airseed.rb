@@ -68,7 +68,7 @@ module Airseed
     end
 
     def request_url(path)
-      URI.join(AUTH_BASE_URL, path).to_s
+      URI.join(Airseed.auth_base_url || AUTH_BASE_URL, path).to_s
     end
   end
 end
