@@ -25,6 +25,11 @@ module Airseed
       request(:get, request_url(path), params)
     end
 
+    def post_endpoint(path, params = {})
+      params.merge!(bearer_token: @access_token)
+      request(:post, request_url(path), params)
+    end
+
     private
     def request_url(path)
       URI.join(Airseed.api_base_url || API_BASE_URL, path).to_s
